@@ -8,7 +8,7 @@ function IngresarCodigo() {
 //PARA METERSE A CURSO HAY QUE INGRESAR UNO DE ESTOS CODIGOS 4B-2024 O 5A-2024
 
   const cursos = {
-    '4B-2024': 'Cuarto Básico B',
+    '4B-2025': 'Cuarto Básico B',
     '5A-2024': 'Quinto Básico A',
   };
 

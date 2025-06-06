@@ -1,9 +1,10 @@
 // src/components/Login.js
 import React from 'react';
-import './Login.css'; // Importamos estilos personalizados si queremos
-
+import BackgroundLayout from './BackgroundLayout';
 function Login() {
-  return (
+  
+return (
+  <BackgroundLayout>
     <div className="container d-flex justify-content-center align-items-center vh-100 fondo-login">
       <div className="card p-4 sombra-login" style={{ width: '100%', maxWidth: '400px' }}>
         <h2 className="text-center mb-4">Iniciar Sesión</h2>
@@ -20,7 +21,8 @@ function Login() {
         </form>
       </div>
     </div>
-  );
+  </BackgroundLayout>
+);
 }
 
 export default Login;

@@ -23,7 +23,6 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <Container className="mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -40,7 +39,6 @@ function App() {
           <Route path="/ver-cursos" element={<SelectCourse />} />
           <Route path="/crear-curso" element={<CreateCourse />} />        
         </Routes>
-      </Container>
     </>
   );
 }

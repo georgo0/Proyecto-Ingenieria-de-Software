@@ -10,7 +10,6 @@ function RegisterStudent() {
     e.preventDefault();
     navigate('/main-student', { state: { nombre } });
   };
-  // Add BackgroundLayout wrapper
   return (
     <BackgroundLayout>
       <div className="container d-flex justify-content-center align-items-center vh-100">

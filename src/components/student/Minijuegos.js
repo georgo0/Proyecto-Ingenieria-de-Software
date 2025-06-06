@@ -16,6 +16,7 @@ function Minijuegos() {
     }
   }, []);
 
+  // Datos de ejemplo
   const juegosPorNivelYUnidad = {
     4: {
       food: ['Memoria de Comida', 'Emparejar imágenes'],
@@ -28,13 +29,15 @@ function Minijuegos() {
       animals: ['Sonidos de animales', 'Trivia de animales']
     }
   };
+const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
 
   const juegos = (juegosPorNivelYUnidad[nivelCurso] || {})[unidadId] || [];
 
   return (
     <BackgroundLayout>
       <div className="container mt-5">
-        <h2 className="mb-4 text-center">Minijuegos para la unidad: {unidadId}</h2>
+
+        <h2 className="mb-4 text-center">Minijuegos para la unidad: {capitalizar(unidadId)}</h2>
 
         <div className="d-flex justify-content-center">
           <div
@@ -70,6 +73,13 @@ function Minijuegos() {
               </div>
             ))}
           </div>
+        </div>
+
+                {/* Botón para volver a la página de curso */}
+        <div className="text-center mt-4">
+          <button className="btn btn-secondary" onClick={() => navigate('/unidades')}>
+            Volver a unidades
+          </button>
         </div>
 
         {nivelCurso === null && (

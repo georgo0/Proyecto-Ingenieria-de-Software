@@ -80,7 +80,7 @@ const unidadesPorNivel = {
 
         {/* Botón para volver a la página de curso */}
         <div className="text-center mt-4">
-          <button className="btn btn-secondary" onClick={() => navigate('/curso')}>
+          <button className="btn btn-secondary" onClick={() => navigate('/curso') }>
             Volver al curso
           </button>
         </div>

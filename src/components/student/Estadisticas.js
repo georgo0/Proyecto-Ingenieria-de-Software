@@ -7,7 +7,7 @@ function Estadísticas() {
 
   // Datos de ejemplo
   const rankingData = [
-    { nombre: 'Jorge Elliot', puntaje: 95 },
+    { nombre: 'Matias Fernandez', puntaje: 95 },
     { nombre: 'Nicolas Gaete', puntaje: 90 },
     { nombre: 'Jorge Gallegos', puntaje: 85 },
     { nombre: 'Valentina Garcia', puntaje: 80 },

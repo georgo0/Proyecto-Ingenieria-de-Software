@@ -1,24 +1,21 @@
 // src/components/MainTeacher.js
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import BackgroundLayout from '../BackgroundLayout'; 
 
 function MainTeacher() {
   const navigate = useNavigate();
-
-  const wallpaperStyle = {
-    //backgroundImage: 'url(https://c4.wallpaperflare.com/wallpaper/950/516/946/flag-britain-color-texture-wallpaper-preview.jpg)', //xddd
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    minHeight: '100vh',
-    paddingTop: '50px',
-    paddingBottom: '50px',
-  };
+  const location = useLocation();
+  const nombreProfesor = location.state?.nombreProfesor || 'Profesor';
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '600px', ...wallpaperStyle }}>
-      <h2 className="text-center mb-4">Bienvenido, profesor</h2>
+    <BackgroundLayout variant="teachers">
 
-      <div className="d-flex flex-column gap-4">
+      <div className="container mt-5 text-center text-dark" style={{ maxWidth: '600px' }}>
+
+        <h2 className="text-center mb-4 text-white ">Bienvenido, Profesor {nombreProfesor}</h2>
+
+        <div className="d-flex flex-column gap-4">
         <div
           className="p-4 border rounded text-center"
           style={{ cursor: 'pointer', backgroundColor: '#e9f7ef' }}
@@ -36,6 +33,7 @@ function MainTeacher() {
         </div>
       </div>
     </div>
+    </BackgroundLayout>
   );
 }
 

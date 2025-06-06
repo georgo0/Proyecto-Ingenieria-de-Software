@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BackgroundLayout from '../BackgroundLayout';
 
-
 function MainStudent() {
   const navigate = useNavigate();
   const [codigoCurso, setCodigoCurso] = useState(null);
@@ -25,7 +24,11 @@ function MainStudent() {
         <div className="d-flex flex-column gap-4">
           <div
             className="p-4 border rounded text-center"
-            style={{ cursor: 'pointer', backgroundColor: '#e9f7ef' }}
+            style={{ 
+              cursor: 'pointer', 
+              backgroundColor: '#e9f7ef', 
+              color: 'black'
+            }}
             onClick={() => navigate('/ingresar-codigo')}
           >
             <h4>Ingresar código para acceder a un curso 💻</h4>
@@ -34,7 +37,11 @@ function MainStudent() {
           {codigoCurso && (
             <div
               className="p-4 border rounded text-center"
-              style={{ cursor: 'pointer', backgroundColor: '#e3f2fd' }}
+              style={{ 
+                cursor: 'pointer', 
+                backgroundColor: '#e3f2fd', 
+                color: 'black' // Asegura que el texto sea negro
+              }}
               onClick={() => navigate('/curso')}
             >
               <h4>Mi curso 🏫</h4>

@@ -16,7 +16,6 @@ function Curso() {
   const opciones = [
     { nombre: 'Unidades 📔', ruta: '/unidades' },
     { nombre: 'Estadísticas 🥇', ruta: '/estadisticas' },
-    { nombre: 'Mis puntajes  💯', ruta: '#' },
     { nombre: 'Volver al inicio 🏠', ruta: '/' },
   ];
 
@@ -24,8 +23,8 @@ function Curso() {
   return (
         <BackgroundLayout>
 
-    <div className="container mt-5 text-center">
-      <h2 className="mb-4">Bienvenido a tu curso {nombreCurso}</h2>
+<div className="container mt-5 text-center text-dark">
+      <h2 className="mb-4 text-white">Bienvenido a tu curso {nombreCurso}</h2>
 
       <div className="d-flex flex-column gap-4 align-items-center mt-4">
         {opciones.map((op, index) => (
