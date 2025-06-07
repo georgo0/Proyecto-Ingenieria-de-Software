@@ -12,7 +12,7 @@ npm install
 ```bash
 npm -v
 ```
-* Para colnar el repositorio
+* Para clonar el repositorio
  ```bash
 https://github.com/georgo0/Proyecto-Ingenieria-de-Software.git
 ``` 
