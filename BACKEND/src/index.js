@@ -1,10 +1,12 @@
-import App from './App.js';
-import 'dotenv/config';
-import {connectDB} from './mongodb.js';
+
+import 'dotenv/config'; 
+import app from './App.js';
+import { connectDB } from './mongodb.js';
 
 connectDB();
-App.listen(3000, () => {
-    console.log('Server is running on port 3000');
+
+app.listen(3000, () => {
+    console.log('Servidor corriendo en el puerto 3000');
 });
 
 

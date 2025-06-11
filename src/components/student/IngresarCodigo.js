@@ -1,54 +1,66 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 import BackgroundLayout from '../BackgroundLayout';
+
 function IngresarCodigo() {
-  const [codigo, setCodigo] = useState('');
-  const navigate = useNavigate();
+    const [codigo, setCodigo] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-//PARA METERSE A CURSO HAY QUE INGRESAR UNO DE ESTOS CODIGOS 4B-2024 O 5A-2024
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
 
-  const cursos = {
-    '4B-2025': 'Cuarto Básico B',
-    '5A-2024': 'Quinto Básico A',
-  };
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+            const response = await axios.post('/api/cursos/join', { codigo }, config);
 
-    if (cursos[codigo]) {
-      localStorage.setItem('codigoCurso', codigo);
-      localStorage.setItem('nombreCurso', cursos[codigo]);
-      navigate('/curso');
-    } else {
-      alert('Código no válido. Intenta nuevamente.');
-    }
-  };
+            alert(response.data.message); 
 
-  return (
+            const courseId = response.data.curso._id;
+            navigate(`/curso/${courseId}`);
+
+        } catch (err) {
+            setError(err.response?.data?.message || 'Ocurrió un error.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
         <BackgroundLayout>
+            <div className="container mt-5" style={{ maxWidth: '400px' }}>
+                <h2 className="mb-4 text-center">Ingresar código para acceder a un curso</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label htmlFor="codigo" className="form-label">Código del curso</label>
+                        <input
+                            type="text"
+                            id="codigo"
+                            className="form-control"
+                            placeholder="Ej: X4T-9A1"
+                            value={codigo}
+                            onChange={(e) => setCodigo(e.target.value.toUpperCase())}
+                            required
+                        />
+                    </div>
 
-    <div className="container mt-5" style={{ maxWidth: '400px' }}>
-      <h2 className="mb-4 text-center">Ingresar código para acceder a un curso</h2>
+                    {error && <div className="alert alert-danger">{error}</div>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="codigo" className="form-label">Código del curso</label>
-          <input
-            type="text"
-            id="codigo"
-            className="form-control"
-            placeholder="Ej: 4B-2024"
-            value={codigo}
-            onChange={(e) => setCodigo(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100">Enviar</button>
-      </form>
-    </div>
-  </BackgroundLayout>
-  );
+                    <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                        {loading ? 'Uniéndote...' : 'Unirse al Curso'}
+                    </button>
+                </form>
+            </div>
+        </BackgroundLayout>
+    );
 }
 
 export default IngresarCodigo;

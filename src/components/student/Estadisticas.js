@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackgroundLayout from '../BackgroundLayout';
 
+ //---- AUN NO SE HA IMPLEMENTADO EL BACKEND PARA ESTADÍSTICAS- ---
+ 
 function Estadísticas() {
   const navigate = useNavigate();
 
