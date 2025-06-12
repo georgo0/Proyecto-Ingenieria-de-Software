@@ -31,7 +31,8 @@ npm install react-bootstrap bootstrap
 
 ---
 
-#Parte de Backend
+# Parte de Backend
+
 Primero hay que iniciar el modulo de backend y luego el proyecto de react, pero antes para su correcto funcionamiento:
 1. Primero instalar:
 ```bash
