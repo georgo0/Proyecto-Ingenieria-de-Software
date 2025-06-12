@@ -75,8 +75,7 @@ export const joinCourse = async (req, res) => {
 
 export const getCourseById = async (req, res) => {
     try {
-        const course = await Curso.findById(req.params.id).populate('alumnos', 'nombre_completo email');
-
+const course = await Curso.findById(req.params.id).populate('alumnos', 'nombre_completo email puntaje');
         if (!course) {
             return res.status(404).json({ message: "Curso no encontrado." });
         }
@@ -106,6 +105,34 @@ export const getMyTeacherCourses = async (req, res) => {
         res.status(200).json(courses);
     } catch (error) {
         console.error("Error al obtener los cursos del profesor:", error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
+};
+
+
+// Sprint 3: Funcion para la tabla de los mejores puntajes + puntaje personal
+export const getCourseLeaderboard = async (req, res) => {
+    try {
+        const { id: courseId } = req.params;
+        const studentId = req.user._id.toString();
+
+        const course = await Curso.findById(courseId).populate('alumnos', 'nombre_completo puntaje');
+
+        if (!course) {
+            return res.status(404).json({ message: "Curso no encontrado." });
+        }
+
+        const currentUserData = course.alumnos.find(a => a._id.toString() === studentId);
+        const myScore = currentUserData ? currentUserData.puntaje : 0; // Si no lo encuentra, puntaje es 0
+
+        const leaderboard = course.alumnos
+            .sort((a, b) => b.puntaje - a.puntaje) 
+            .slice(0, 5); 
+
+        res.status(200).json({ myScore, leaderboard });
+
+    } catch (error) {
+        console.error("Error al obtener el ranking del curso:", error);
         res.status(500).json({ message: "Error interno del servidor." });
     }
 };
