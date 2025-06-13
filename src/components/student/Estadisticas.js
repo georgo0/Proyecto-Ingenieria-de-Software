@@ -1,62 +1,84 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import BackgroundLayout from '../BackgroundLayout';
 
- //---- AUN NO SE HA IMPLEMENTADO EL BACKEND PARA ESTADÍSTICAS- ---
- 
 function Estadísticas() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { courseId } = useParams();
 
-  // Datos de ejemplo
-  const rankingData = [
-    { nombre: 'Matias Fernandez', puntaje: 95 },
-    { nombre: 'Nicolas Gaete', puntaje: 90 },
-    { nombre: 'Jorge Gallegos', puntaje: 85 },
-    { nombre: 'Valentina Garcia', puntaje: 80 },
-    { nombre: 'Diego Salazar', puntaje: 78 },
-  ];
+    const [myScore, setMyScore] = useState(0);
+    const [leaderboard, setLeaderboard] = useState([]);
 
-  const sortedData = rankingData
-    .sort((a, b) => b.puntaje - a.puntaje)
-    .map((item, index) => ({
-      ...item,
-      puesto: index + 1,
-    }));
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  return (
-    <BackgroundLayout>
-      <div className="container mt-5">
-        <h2 className="text-center mb-4">🏆 Student Ranking 🏆</h2>
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped text-center">
-            <thead className="table-success">
-              <tr>
-                <th>Position</th>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedData.map((estudiante, index) => (
-                <tr key={index}>
-                  <td>{estudiante.puesto}</td>
-                  <td>{estudiante.nombre}</td>
-                  <td>{estudiante.puntaje}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const config = { headers: { Authorization: `Bearer ${token}` } };
 
-        {/* Botón para volver a la página de curso */}
-        <div className="text-center mt-4">
-          <button className="btn btn-secondary" onClick={() => navigate('/curso')}>
-            Back to course
-          </button>
-        </div>
-      </div>
-    </BackgroundLayout>
-  );
+                const { data } = await axios.get(`/api/cursos/${courseId}/leaderboard`, config);
+
+                setMyScore(data.myScore);
+                setLeaderboard(data.leaderboard);
+
+            } catch (err) {
+                setError("No se pudieron cargar las estadísticas.");
+                console.error("Error cargando estadísticas:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, [courseId]);
+
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando estadísticas...</h2></BackgroundLayout>;
+    if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
+
+    return (
+        <BackgroundLayout>
+            <div className="container mt-5">
+                <div className="card text-center mb-5 shadow-sm">
+                    <div className="card-body">
+                        <h4 className="card-title">Tu Puntaje Actual</h4>
+                        <p className="display-4 fw-bold text-success">{myScore} 🏆</p>
+                    </div>
+                </div>
+
+                {/* Sección para el Ranking */}
+                <h2 className="text-center mb-4 text-white">🥇 Ranking del Curso 🥇</h2>
+                <div className="table-responsive">
+                    <table className="table table-bordered table-striped text-center table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th>Puesto</th>
+                                <th>Nombre</th>
+                                <th>Puntaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {leaderboard.map((estudiante, index) => (
+                                <tr key={estudiante._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{estudiante.nombre_completo}</td>
+                                    <td>{estudiante.puntaje}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="text-center mt-4">
+                    <button className="btn btn-secondary" onClick={() => navigate(`/curso/${courseId}`)}>
+                        Volver al curso
+                    </button>
+                </div>
+            </div>
+        </BackgroundLayout>
+    );
 }
 
 export default Estadísticas;

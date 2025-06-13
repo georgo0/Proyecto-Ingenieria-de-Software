@@ -35,7 +35,7 @@ function App() {
           <Route path="/curso/:courseId" element={<Curso />} />
           <Route path="/unidades/:courseId" element={<Unidades />} />
           <Route path="/minijuegos/:unidadId" element={<Minijuegos />} />
-          <Route path="/estadisticas" element={<Estadísticas />} />          
+          <Route path="/estadisticas/:courseId" element={<Estadísticas />} />
           <Route path="/main-teacher" element={<MainTeacher />} />
           <Route path="/ver-cursos" element={<SelectCourse />} />
           <Route path="/crear-curso" element={<CreateCourse />} />  

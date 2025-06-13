@@ -36,7 +36,6 @@ function SelectCourse() {
             <div className="container py-5 text-center">
                 <div className="p-5 mb-4 bg-light rounded-3">
                     <h1 className="display-5 fw-bold" style={{ color: 'black' }}>Mis Cursos</h1>
-                    {/* Apply inline style here */}
                     <p className="fs-4" style={{ color: 'black' }}>Selecciona el curso del que deseas ver la lista de alumnos.</p>
                     
                     {myCourses.length > 0 ? (
