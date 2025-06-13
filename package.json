@@ -40,5 +40,17 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "description": "En este repositorio se subiran los avances del proyecto",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgo0/Proyecto-Ingenieria-de-Software.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgo0/Proyecto-Ingenieria-de-Software/issues"
+  },
+  "homepage": "https://github.com/georgo0/Proyecto-Ingenieria-de-Software#readme"
 }
