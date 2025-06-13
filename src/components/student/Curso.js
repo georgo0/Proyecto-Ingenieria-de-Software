@@ -47,7 +47,7 @@ function Curso() {
     return (
         <BackgroundLayout>
             <div className="container mt-5 text-center text-dark">
-                <h2 className="mb-4 text-white">Bienvenido a tu curso de {course?.nivel}°{course?.letra}</h2>
+                <h2 className="mb-4 text-white">Welcome to your course {course?.nivel}°{course?.letra}</h2>
 
                 <div className="d-flex flex-column gap-4 align-items-center mt-4">
                     {opciones.map((op, index) => (

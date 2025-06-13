@@ -5,11 +5,11 @@ import BackgroundLayout from '../BackgroundLayout';
 
 function Estadísticas() {
     const navigate = useNavigate();
-    const { courseId } = useParams(); 
+    const { courseId } = useParams();
 
     const [myScore, setMyScore] = useState(0);
     const [leaderboard, setLeaderboard] = useState([]);
-    
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -18,9 +18,9 @@ function Estadísticas() {
             try {
                 const token = localStorage.getItem('token');
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                
+
                 const { data } = await axios.get(`/api/cursos/${courseId}/leaderboard`, config);
-                
+
                 setMyScore(data.myScore);
                 setLeaderboard(data.leaderboard);
 
@@ -33,7 +33,7 @@ function Estadísticas() {
         };
 
         fetchStats();
-    }, [courseId]); 
+    }, [courseId]);
 
     if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando estadísticas...</h2></BackgroundLayout>;
     if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;

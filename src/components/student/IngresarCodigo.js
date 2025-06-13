@@ -37,10 +37,24 @@ function IngresarCodigo() {
     return (
         <BackgroundLayout>
             <div className="container mt-5" style={{ maxWidth: '400px' }}>
-                <h2 className="mb-4 text-center">Ingresar código para acceder a un curso</h2>
+                <div style={{ marginBottom: '2rem' }}>
+                    <h1 className="fw-bold fs-1 text-center" style={{ textShadow: '2px 2px 6px rgba(0, 0, 0, 0.6)' }}>
+                        Enter a code to join a course
+                    </h1>
+                    <h4
+                        className="fw-normal fst-italic text-center"
+                        style={{
+                        color: '#ccc', // azul pastel
+                        fontSize: '1.2rem',
+                        textShadow: '1px 1px 4px rgba(0, 0, 0, 0.4)',
+                        }}
+                    >
+                        Ingresar código para acceder a un curso
+                    </h4>
+                    </div>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="codigo" className="form-label">Código del curso</label>
+                        <label htmlFor="codigo" className="form-label">Course code</label>
                         <input
                             type="text"
                             id="codigo"
@@ -55,7 +69,7 @@ function IngresarCodigo() {
                     {error && <div className="alert alert-danger">{error}</div>}
 
                     <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-                        {loading ? 'Uniéndote...' : 'Unirse al Curso'}
+                        {loading ? 'Joining...' : 'Join the Course'}
                     </button>
                 </form>
             </div>
