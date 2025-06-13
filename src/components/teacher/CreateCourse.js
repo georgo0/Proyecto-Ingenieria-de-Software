@@ -15,21 +15,38 @@ function CreateCourse() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [generatedCode, setGeneratedCode] = useState(null);
-    const [isCopied, setIsCopied] = useState(false); 
+    const [isCopied, setIsCopied] = useState(false);
 
     const handleChange = (e) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value.toUpperCase()
+            [name]: name === 'letra' ? value.toUpperCase().slice(0, 1) : value
         });
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
         setGeneratedCode(null);
         setIsCopied(false);
+
+        const nivel = parseInt(formData.nivel, 10);
+        const letra = formData.letra;
+
+        // Validaciones
+        if (isNaN(nivel) || nivel < 3 || nivel > 6) {
+            setError("El nivel del curso debe estar entre 3 y 6.");
+            setLoading(false);
+            return;
+        }
+
+        if (!/^[A-Z]$/.test(letra)) {
+            setError("La letra del curso debe ser una sola entre A y Z.");
+            setLoading(false);
+            return;
+        }
 
         try {
             const token = localStorage.getItem('token');
@@ -40,11 +57,11 @@ function CreateCourse() {
             }
 
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            
+
             const response = await axios.post('/api/cursos', formData, config);
-            
+
             setGeneratedCode(response.data.codigo);
-            setFormData({ nivel: '', letra: '' }); 
+            setFormData({ nivel: '', letra: '' });
 
         } catch (err) {
             setError(err.response?.data?.message || 'Ocurrió un error al crear el curso.');
@@ -70,11 +87,13 @@ function CreateCourse() {
                             <input
                                 type="number"
                                 className="form-control"
-                                name="nivel" 
+                                name="nivel"
                                 value={formData.nivel}
                                 onChange={handleChange}
                                 required
                                 placeholder="Ej: 4"
+                                min="1"
+                                max="8"
                             />
                         </div>
                         <div className="col-md-6">
