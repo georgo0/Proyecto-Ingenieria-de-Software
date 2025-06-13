@@ -18,6 +18,7 @@ import Estadísticas from './components/student/Estadisticas';
 import MainTeacher from './components/teacher/MainTeacher';
 import SelectCourse from './components/teacher/SelectCourse';
 import CreateCourse from './components/teacher/CreateCourse';
+import CourseRoster from './components/teacher/CourseRoster';
 
 function App() {
   return (
@@ -31,13 +32,14 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/main-student" element={<MainStudent />} />
           <Route path="/ingresar-codigo" element={<IngresarCodigo />} />
-          <Route path="/curso" element={<Curso />} />
-          <Route path="/unidades" element={<Unidades />} />
+          <Route path="/curso/:courseId" element={<Curso />} />
+          <Route path="/unidades/:courseId" element={<Unidades />} />
           <Route path="/minijuegos/:unidadId" element={<Minijuegos />} />
-          <Route path="/estadisticas" element={<Estadísticas />} />          
+          <Route path="/estadisticas/:courseId" element={<Estadísticas />} />
           <Route path="/main-teacher" element={<MainTeacher />} />
           <Route path="/ver-cursos" element={<SelectCourse />} />
-          <Route path="/crear-curso" element={<CreateCourse />} />        
+          <Route path="/crear-curso" element={<CreateCourse />} />  
+          <Route path="/teacher/course-roster/:courseId" element={<CourseRoster />} />
         </Routes>
     </>
   );

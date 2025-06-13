@@ -1,93 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import BackgroundLayout from '../BackgroundLayout';
 
 function Unidades() {
-  const [nivelCurso, setNivelCurso] = useState(null);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { courseId } = useParams(); 
 
-  useEffect(() => {
-    const codigo = localStorage.getItem('codigoCurso');
-    if (codigo) {
-      const match = codigo.match(/^(\d)[A-Z]-\d{4}$/);
-      if (match) {
-        setNivelCurso(parseInt(match[1]));
-      }
-    }
-  }, []);
+    const [unidades, setUnidades] = useState([]);
+    const [course, setCourse] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const unidadesPorNivel = {
-  4: [
-    { nombre: 'Food', imagen: '/images/unidades/4/food.jpg' },
-    { nombre: 'Space', imagen: '/images/unidades/4/space.jpg' },
-    { nombre: 'Summer', imagen: '/images/unidades/4/summer.png' },
-  ],
-  5: [
-    { nombre: 'City', imagen: '/images/unidades/5/city.jpg' },
-    { nombre: 'School', imagen: '/images/unidades/5/school.jpg' },
-    { nombre: 'Animals', imagen: '/images/unidades/5/animals.jpg' },
-  ],
-};
+    useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const unidades = unidadesPorNivel[nivelCurso] || [];
+                const courseResponse = await axios.get(`/api/cursos/${courseId}`, config);
+                const cursoActual = courseResponse.data;
+                setCourse(cursoActual);
 
-  return (
+                const unidadesResponse = await axios.get(`/api/unidades/nivel/${cursoActual.nivel}`, config);
+                setUnidades(unidadesResponse.data);
+
+            } catch (err) {
+                setError("No se pudieron cargar las unidades.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUnits();
+    }, [courseId]); 
+
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando...</h2></BackgroundLayout>;
+    if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
+
+    return (
         <BackgroundLayout>
+            <div className="container mt-5 text-center">
+                <h2 className="mb-4 text-white">Unidades para {course?.nivel}º Básico</h2>
 
-    <div className="container mt-5 text-center">
-      <h2 className="mb-4">Unidades para {nivelCurso}º Básico</h2>
+                <div className="d-flex flex-column align-items-center gap-3">
+                    {unidades.map((unidad) => (
+                        <div
+                            key={unidad._id}
+                            className="w-75 rounded border"
+                            style={{ /* ... tus estilos ... */ }}
+                            onClick={() => navigate(`/minijuegos/${unidad.nombre.toLowerCase()}`)}
+                        >
+                            {unidad.nombre}
+                        </div>
+                    ))}
+                </div>
 
-      <div className="d-flex flex-column align-items-center gap-3">
-{unidades.map((unidad, index) => (
-  <div
-    key={index}
-    className="w-75 rounded border"
-    style={{
-      backgroundImage: `url(${unidad.imagen})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: '150px',
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: '64px',
-      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-      transition: '0.3s',
-    }}
-    onClick={() => {
-      navigate(`/minijuegos/${unidad.nombre.toLowerCase()}`);
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = 'scale(1.03)';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.transform = 'scale(1)';
-    }}
-  >
-    {unidad.nombre}
-  </div>
-))}
-
-      </div>
-
-      {nivelCurso === null && (
-        <p className="mt-4 text-danger">No se ha detectado el curso correctamente.</p>
-      )}
-
-
-        {/* Botón para volver a la página de curso */}
-        <div className="text-center mt-4">
-          <button className="btn btn-secondary" onClick={() => navigate('/curso') }>
-            Volver al curso
-          </button>
-        </div>
-    </div>
+                <div className="text-center mt-4">
+                    <button className="btn btn-secondary" onClick={() => navigate(`/curso/${courseId}`)}>
+                        Volver al curso
+                    </button>
+                </div>
+            </div>
         </BackgroundLayout>
-
-  );
+    );
 }
 
 export default Unidades;
