@@ -8,7 +8,6 @@ import BackgroundLayout from '../BackgroundLayout';
 function RegisterTeacher() {
     const navigate = useNavigate();
 
-    // Estados para todos los campos del formulario
     const [nombreProfesor, setNombreProfesor] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -50,7 +49,6 @@ function RegisterTeacher() {
                 <div className="card p-4 sombra-register" style={{ width: '100%', maxWidth: '400px' }}>
                     <h2 className="text-center mb-4">Registro de Profesor</h2>
                     <form onSubmit={handleSubmit}>
-                        {/* Nombre Completo */}
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Nombre Completo</label>
                             <input
@@ -62,7 +60,6 @@ function RegisterTeacher() {
                                 required
                             />
                         </div>
-                        {/* Correo Electrónico */}
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Correo Electrónico</label>
                             <input
@@ -74,7 +71,6 @@ function RegisterTeacher() {
                                 required
                             />
                         </div>
-                        {/* Contraseña */}
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Contraseña</label>
                             <input

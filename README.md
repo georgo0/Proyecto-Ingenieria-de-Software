@@ -46,7 +46,11 @@ npm install mongoose
 ```bash
 npm install axios
 ```
-4. Finalmente, desde la carpeta `BACKEND`
+4. Luego, desde la carpeta `BACKEND` correr
 ```bash
 npm run dev
+```
+5. Finalmente, desde la carpeta raiz
+```bash
+npm start
 ```
