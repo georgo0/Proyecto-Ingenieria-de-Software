@@ -26,14 +26,14 @@ function Estadísticas() {
   return (
     <BackgroundLayout>
       <div className="container mt-5">
-        <h2 className="text-center mb-4">🏆 Ranking de Estudiantes 🏆</h2>
+        <h2 className="text-center mb-4">🏆 Student Ranking 🏆</h2>
         <div className="table-responsive">
           <table className="table table-bordered table-striped text-center">
             <thead className="table-success">
               <tr>
-                <th>Puesto</th>
-                <th>Nombre</th>
-                <th>Puntaje</th>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Score</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@ function Estadísticas() {
         {/* Botón para volver a la página de curso */}
         <div className="text-center mt-4">
           <button className="btn btn-secondary" onClick={() => navigate('/curso')}>
-            Volver al curso
+            Back to course
           </button>
         </div>
       </div>

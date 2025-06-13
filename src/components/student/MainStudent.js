@@ -40,7 +40,7 @@ function MainStudent() {
     return (
         <BackgroundLayout>
             <div className="container mt-5" style={{ maxWidth: '600px' }}>
-                <h2 className="text-center mb-4">Bienvenido, {nombre}!</h2>
+                <h2 className="text-center mb-4">Welcome, {nombre}!</h2>
                 <div className="d-flex flex-column gap-4">
 
                     {/*  Si no tiene curso, muestra el botón para unirse */}
@@ -50,7 +50,19 @@ function MainStudent() {
                             style={{ cursor: 'pointer', backgroundColor: '#e9f7ef', color: 'black' }}
                             onClick={() => navigate('/ingresar-codigo')}
                         >
-                            <h4>Ingresar código para acceder a un curso 💻</h4>
+                            <h4>
+                                <div>Enter the code-class to access a course 💻</div>
+                                <div
+                                    className="fst-italic"
+                                    style={{ fontSize: '1rem', 
+                                    fontWeight: 400, 
+                                    color: '#2856e0', 
+                                    marginTop: '0.2rem' }}
+                                >
+                                    Ingresa el código de clase para acceder a un curso
+                                </div>
+                               
+                            </h4>
                         </div>
                     )}
 
