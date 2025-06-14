@@ -96,7 +96,7 @@ function CourseRoster() {
                     </ul>
                 </div>
                 <div className="text-center mt-4">
-                    <button className="btn btn-secondary" onClick={() => navigate('/select-course')}>
+                    <button className="btn btn-secondary" onClick={() => navigate('/ver-cursos')}>
                         Volver a mis cursos
                     </button>
                 </div>

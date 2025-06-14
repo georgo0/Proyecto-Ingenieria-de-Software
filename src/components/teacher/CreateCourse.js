@@ -92,8 +92,6 @@ function CreateCourse() {
                                 onChange={handleChange}
                                 required
                                 placeholder="Ej: 4"
-                                min="1"
-                                max="8"
                             />
                         </div>
                         <div className="col-md-6">
