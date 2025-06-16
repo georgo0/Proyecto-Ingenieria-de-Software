@@ -31,13 +31,13 @@ function Curso() {
     }, [courseId]); 
 
     const opciones = [
-        { nombre: 'Unidades 📔', ruta: `/unidades/${courseId}` },
-        { nombre: 'Estadísticas 🥇', ruta: `/estadisticas/${courseId}` },
-        { nombre: 'Volver al inicio 🏠', ruta: '/main-student' },
+        { nombre: 'Units 📔', ruta: `/unidades/${courseId}` },
+        { nombre: 'Statistics 🥇', ruta: `/estadisticas/${courseId}` },
+        { nombre: 'Back to homepage 🏠', ruta: '/main-student' },
     ];
 
     if (loading) {
-        return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando curso...</h2></BackgroundLayout>;
+        return <BackgroundLayout><h2 className="text-white text-center mt-5">Loading course...</h2></BackgroundLayout>;
     }
 
     if (error) {

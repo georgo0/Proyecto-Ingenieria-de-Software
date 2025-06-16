@@ -40,13 +40,13 @@ function Unidades() {
         fetchUnits();
     }, [courseId]);
 
-    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando...</h2></BackgroundLayout>;
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Loading...</h2></BackgroundLayout>;
     if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
 
     return (
         <BackgroundLayout>
             <div className="container mt-5 text-center">
-                <h2 className="mb-4 text-white">Unidades para {course?.nivel}º Básico</h2>
+                <h2 className="mb-4 text-white">Units for {course?.nivel}º Grade</h2>
 
                 <div className="d-flex flex-column align-items-center gap-3">
                     {unidades.map((unidad) => (
@@ -79,7 +79,7 @@ function Unidades() {
 
                 <div className="text-center mt-4">
                     <button className="btn btn-secondary" onClick={() => navigate(`/curso/${courseId}`)}>
-                        Volver al curso
+                        Back to course
                     </button>
                 </div>
             </div>

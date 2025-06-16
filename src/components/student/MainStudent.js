@@ -34,7 +34,7 @@ function MainStudent() {
     }, []);
 
     if (loading) {
-        return <BackgroundLayout><div className="container mt-5 text-center"><h2>Cargando...</h2></div></BackgroundLayout>;
+        return <BackgroundLayout><div className="container mt-5 text-center"><h2>Loading...</h2></div></BackgroundLayout>;
     }
 
     return (
@@ -73,7 +73,7 @@ function MainStudent() {
                             style={{ cursor: 'pointer', backgroundColor: '#e3f2fd', color: 'black' }}
                             onClick={() => navigate(`/curso/${myCourse._id}`)}
                         >
-                            <h5>Ir a mi curso: {myCourse.nivel}° {myCourse.letra} 🏫</h5>
+                            <h5>Go to my course: {myCourse.nivel}° {myCourse.letra} 🏫</h5>
                         </div>
                     )}
                     
