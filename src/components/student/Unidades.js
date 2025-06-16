@@ -5,12 +5,13 @@ import BackgroundLayout from '../BackgroundLayout';
 
 function Unidades() {
     const navigate = useNavigate();
-    const { courseId } = useParams(); 
+    const { courseId } = useParams();
 
     const [unidades, setUnidades] = useState([]);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
 
     useEffect(() => {
         const fetchUnits = async () => {
@@ -22,8 +23,12 @@ function Unidades() {
                 const cursoActual = courseResponse.data;
                 setCourse(cursoActual);
 
-                const unidadesResponse = await axios.get(`/api/unidades/nivel/${cursoActual.nivel}`, config);
-                setUnidades(unidadesResponse.data);
+                if (cursoActual && cursoActual.nivel) {
+                    const unidadesResponse = await axios.get(`/api/unidades/nivel/${cursoActual.nivel}`, config);
+                    setUnidades(unidadesResponse.data);
+                } else {
+                    setError("No se pudo determinar el nivel del curso.");
+                }
 
             } catch (err) {
                 setError("No se pudieron cargar las unidades.");
@@ -33,7 +38,7 @@ function Unidades() {
         };
 
         fetchUnits();
-    }, [courseId]); 
+    }, [courseId]);
 
     if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando...</h2></BackgroundLayout>;
     if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
@@ -48,8 +53,24 @@ function Unidades() {
                         <div
                             key={unidad._id}
                             className="w-75 rounded border"
-                            style={{ /* ... tus estilos ... */ }}
+                            style={{
+                                backgroundImage: `url(${unidad.imagen})`, // Construimos la URL completa
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                height: '150px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                                fontWeight: 'bold',
+                                fontSize: '64px',
+                                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+                                transition: 'transform 0.3s',
+                            }}
                             onClick={() => navigate(`/minijuegos/${unidad.nombre.toLowerCase()}`)}
+                            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
                         >
                             {unidad.nombre}
                         </div>
