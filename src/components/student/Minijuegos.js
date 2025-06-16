@@ -37,7 +37,7 @@ const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
     <BackgroundLayout>
       <div className="container mt-5">
 
-        <h2 className="mb-4 text-center">Minijuegos para la unidad: {capitalizar(unidadId)}</h2>
+        <h2 className="mb-4 text-center">Minigames for unit: {capitalizar(unidadId)}</h2>
 
         <div className="d-flex justify-content-center">
           <div
@@ -78,7 +78,7 @@ const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
                 {/* Botón para volver a la página de curso */}
         <div className="text-center mt-4">
           <button className="btn btn-secondary" onClick={() => navigate('/unidades')}>
-            Volver a unidades
+            Back to units
           </button>
         </div>
 
