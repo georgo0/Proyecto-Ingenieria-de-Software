@@ -21,7 +21,7 @@ function CreateCourse() {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: name === 'letra' ? value.toUpperCase().slice(0, 1) : value
+            [name]: value
         });
     };
 
@@ -42,8 +42,8 @@ function CreateCourse() {
             return;
         }
 
-        if (!/^[A-Z]$/.test(letra)) {
-            setError("La letra del curso debe ser una sola entre A y Z.");
+        if (!/^[A-G]$/.test(letra)) {
+            setError("La letra del curso debe ser entre A y G.");
             setLoading(false);
             return;
         }
@@ -84,28 +84,37 @@ function CreateCourse() {
                     <div className="row mb-3">
                         <div className="col-md-6">
                             <label className="form-label">Nivel del curso</label>
-                            <input
-                                type="number"
-                                className="form-control"
+                            <select
+                                className="form-select"
                                 name="nivel"
                                 value={formData.nivel}
                                 onChange={handleChange}
                                 required
-                                placeholder="Ej: 4"
-                            />
+                            >
+                                <option value="" disabled hidden>Selecciona un nivel</option>
+                                {[3, 4, 5, 6].map((nivel) => (
+                                    <option key={nivel} value={nivel}>
+                                        {nivel}° Básico
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Letra</label>
-                            <input
-                                type="text"
-                                className="form-control"
+                            <select
+                                className="form-select"
                                 name="letra"
                                 value={formData.letra}
                                 onChange={handleChange}
                                 required
-                                placeholder="Ej: A"
-                                maxLength="1"
-                            />
+                            >
+                                <option value="" disabled hidden>Selecciona una letra</option>
+                                {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((letra) => (
+                                    <option key={letra} value={letra}>
+                                        {letra}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-success w-100" disabled={loading}>
