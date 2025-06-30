@@ -54,7 +54,7 @@ function Unidades() {
                             key={unidad._id}
                             className="w-75 rounded border"
                             style={{
-                                backgroundImage: `url(${unidad.imagen})`, // Construimos la URL completa
+                                backgroundImage: `url(${unidad.imagen})`, 
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 height: '150px',
@@ -68,7 +68,7 @@ function Unidades() {
                                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
                                 transition: 'transform 0.3s',
                             }}
-                            onClick={() => navigate(`/minijuegos/${unidad.nombre.toLowerCase()}`)}
+                            onClick={() => navigate(`/minijuegos/${unidad._id}`)}
                             onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; }}
                             onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
                         >

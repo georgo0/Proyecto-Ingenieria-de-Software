@@ -14,6 +14,7 @@ import Curso from './components/student/Curso';
 import Unidades from './components/student/Unidades';
 import Minijuegos from './components/student/Minijuegos';
 import Estadísticas from './components/student/Estadisticas';
+import MemoriceGame from './components/student/MemoriceGame';
 
 import MainTeacher from './components/teacher/MainTeacher';
 import SelectCourse from './components/teacher/SelectCourse';
@@ -34,6 +35,7 @@ function App() {
           <Route path="/ingresar-codigo" element={<IngresarCodigo />} />
           <Route path="/curso/:courseId" element={<Curso />} />
           <Route path="/unidades/:courseId" element={<Unidades />} />
+          <Route path="/minijuegos/memorice/:unidadId" element={<MemoriceGame />} />
           <Route path="/minijuegos/:unidadId" element={<Minijuegos />} />
           <Route path="/estadisticas/:courseId" element={<Estadísticas />} />
           <Route path="/main-teacher" element={<MainTeacher />} />

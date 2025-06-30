@@ -1,93 +1,76 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import BackgroundLayout from '../BackgroundLayout';
+
 function Minijuegos() {
-  const { unidadId } = useParams();
-  const [nivelCurso, setNivelCurso] = useState(null);
-  const navigate = useNavigate();
+    const { unidadId } = useParams();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const codigo = localStorage.getItem('codigoCurso');
-    if (codigo) {
-      const match = codigo.match(/^([4-6])[A-Z]-\d{4}$/);
-      if (match) {
-        setNivelCurso(parseInt(match[1]));
-      }
-    }
-  }, []);
+    const [unidad, setUnidad] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  // Datos de ejemplo
-  const juegosPorNivelYUnidad = {
-    4: {
-      food: ['Memoria de Comida', 'Emparejar imágenes'],
-      space: ['Trivia del Espacio', 'Vocabulario en órbita'],
-      summer: ['Juego de Ropa de Verano', 'Arrastrar y Soltar']
-    },
-    5: {
-      city: ['Completa la frase', 'Encuentra el lugar'],
-      school: ['Ordena las palabras', 'Trivia escolar'],
-      animals: ['Sonidos de animales', 'Trivia de animales']
-    }
-  };
-const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
+    useEffect(() => {
+        const fetchUnidadDetails = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const juegos = (juegosPorNivelYUnidad[nivelCurso] || {})[unidadId] || [];
+                const { data } = await axios.get(`/api/unidades/details/${unidadId}`, config);
+                setUnidad(data);
 
-  return (
-    <BackgroundLayout>
-      <div className="container mt-5">
+            } catch (err) {
+                setError("No se pudieron cargar los minijuegos para esta unidad.");
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        <h2 className="mb-4 text-center">Minigames for unit: {capitalizar(unidadId)}</h2>
+        fetchUnidadDetails();
+    }, [unidadId]);
 
-        <div className="d-flex justify-content-center">
-          <div
-            className="d-flex flex-row gap-3 overflow-auto px-2 pb-3"
-            style={{
-              maxWidth: '100%',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {juegos.map((juego, index) => (
-              <div
-                key={index}
-                className="card text-center p-3"
-                style={{
-                  minWidth: '200px',
-                  backgroundColor: '#e0ffe0',
-                  cursor: 'pointer',
-                  transition: '0.3s',
-                  fontWeight: 'bold',
-                  flex: '0 0 auto',
-                }}
-                onClick={() => {
-                  alert(`Acceder a: ${juego}`);
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#c2f0c2';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e0ffe0';
-                }}
-              >
-                {juego}
-              </div>
-            ))}
-          </div>
-        </div>
+    const handleGameClick = (juegoTipo) => {
+        // Se construye la ruta dinámicamente según el 'tipo' del juego
+        navigate(`/minijuegos/${juegoTipo}/${unidadId}`);
+    };
 
-                {/* Botón para volver a la página de curso */}
-        <div className="text-center mt-4">
-          <button className="btn btn-secondary" onClick={() => navigate('/unidades')}>
-            Back to units
-          </button>
-        </div>
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando minijuegos...</h2></BackgroundLayout>;
+    if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
 
-        {nivelCurso === null && (
-          <p className="mt-4 text-danger text-center">No se detectó correctamente el curso.</p>
-        )}
-      </div>
-    </BackgroundLayout>
-  );
+    return (
+        <BackgroundLayout>
+            <div className="container mt-5">
+                <h2 className="mb-4 text-center text-white">Minijuegos para la unidad: {unidad?.nombre}</h2>
+
+                <div className="d-flex justify-content-center">
+                    <div className="d-flex flex-row gap-3 overflow-auto px-2 pb-3">
+                        {unidad?.juegosDisponibles.length > 0 ? (
+                            unidad.juegosDisponibles.map((juego, index) => (
+                                <div
+                                    key={index}
+                                    className="card text-center p-3"
+                                    style={{ minWidth: '200px', cursor: 'pointer' }}
+                                    onClick={() => handleGameClick(juego.tipo)}
+                                >
+                                    <h5>{juego.nombre}</h5>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-white">No hay juegos disponibles para esta unidad.</p>
+                        )}
+                    </div>
+                </div>
+
+                <div className="text-center mt-4">
+                    {/* navigate(-1) es un truco simple para "volver" a la página anterior */}
+                    <button className="btn btn-secondary" onClick={() => navigate(-1)}>
+                        Volver a las unidades
+                    </button>
+                </div>
+            </div>
+        </BackgroundLayout>
+    );
 }
 
 export default Minijuegos;

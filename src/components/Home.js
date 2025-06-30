@@ -48,7 +48,7 @@ function Home() {
           <Card style={{ width: '18rem' }}>
             <Card.Body className="text-center">
               <Card.Title>
-                <div>Teacher's Sign up/</div>
+                <div>Teacher's Sign up</div>
                 <div
                   className="fst-italic"
                   style={{
@@ -63,7 +63,7 @@ function Home() {
               </Card.Title>
 
               <Card.Text>
-                <div>To register as a teacher click here/</div>
+                <div>To register as a teacher click here</div>
                 <div
                   className="fst-italic"
                   style={{
@@ -85,7 +85,7 @@ function Home() {
           <Card style={{ width: '18rem' }}>
             <Card.Body className="text-center">
               <Card.Title>
-              <div>Student's Sign up/</div>
+              <div>Student's Sign up</div>
                 <div
                   className="fst-italic"
                   style={{
@@ -100,7 +100,7 @@ function Home() {
               </Card.Title>
 
               <Card.Text>
-                <div>To register as a student click here/</div>
+                <div>To register as a student click here</div>
                 <div
                   className="fst-italic"
                   style={{
@@ -124,7 +124,7 @@ function Home() {
           <Card className="text-center w-50">
             <Card.Body>
               <Card.Title>
-                <div>Do you already have an account?/</div>
+                <div>Do you already have an account?</div>
                 <div
                   className="fst-italic"
                   style={{

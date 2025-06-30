@@ -15,7 +15,14 @@ const unidadSchema = new mongoose.Schema({
         type: Number,
         required: true,
         index: true 
-    }
+    },
+
+    juegosDisponibles: [{
+        nombre: String, // Nombre para mostrar, ej: "Memorice de Comida"
+        tipo: String,   // Identificador único para la ruta, ej: "memorice"
+    }]
+
+
 }, {
     collection: 'unidades'
 }
