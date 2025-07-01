@@ -15,7 +15,7 @@ import Unidades from './components/student/Unidades';
 import Minijuegos from './components/student/Minijuegos';
 import Estadísticas from './components/student/Estadisticas';
 import MemoriceGame from './components/student/MemoriceGame';
-
+import GuessTheWordGame from './components/student/GuessTheWordGame';
 import MainTeacher from './components/teacher/MainTeacher';
 import SelectCourse from './components/teacher/SelectCourse';
 import CreateCourse from './components/teacher/CreateCourse';
@@ -36,6 +36,7 @@ function App() {
           <Route path="/curso/:courseId" element={<Curso />} />
           <Route path="/unidades/:courseId" element={<Unidades />} />
           <Route path="/minijuegos/memorice/:unidadId" element={<MemoriceGame />} />
+          <Route path="/minijuegos/guess_the_word/:unidadId" element={<GuessTheWordGame />} />
           <Route path="/minijuegos/:unidadId" element={<Minijuegos />} />
           <Route path="/estadisticas/:courseId" element={<Estadísticas />} />
           <Route path="/main-teacher" element={<MainTeacher />} />
