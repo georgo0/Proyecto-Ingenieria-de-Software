@@ -29,19 +29,37 @@ function SelectCourse() {
         navigate(`/teacher/course-roster/${courseId}`);
     };
 
-    if (loading) return <BackgroundLayout variant="teachers"><h2 className='text-white text-center mt-5'>Cargando tus cursos...</h2></BackgroundLayout>;
+    if (loading) {
+        return (
+            <BackgroundLayout variant="teachers">
+                <h2 className='text-white text-center mt-5'>Cargando tus cursos...</h2>
+            </BackgroundLayout>
+        );
+    }
 
     return (
         <BackgroundLayout variant="teachers">
-            <div className="container py-5 text-center">
-                <div className="p-5 mb-4 bg-light rounded-3">
-                    <h1 className="display-5 fw-bold" style={{ color: 'black' }}>Mis Cursos</h1>
-                    <p className="fs-4" style={{ color: 'black' }}>Selecciona el curso del que deseas ver la lista de alumnos.</p>
-                    
+            <div className="container py-5 d-flex flex-column align-items-center">
+                <div
+                    style={{
+                        backgroundColor: '#f5f5dc', // Beige claro
+                        borderRadius: '12px',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                        padding: '3rem',
+                        maxWidth: '800px',
+                        width: '100%',
+                        textAlign: 'center',
+                    }}
+                >
+                    <h1 className="display-5 fw-bold text-dark mb-3">Mis Cursos</h1>
+                    <p className="fs-4 text-secondary mb-4">
+                        Selecciona el curso del que deseas ver la lista de alumnos.
+                    </p>
+
                     {myCourses.length > 0 ? (
                         myCourses.map(course => (
-                            <button 
-                                key={course._id} 
+                            <button
+                                key={course._id}
                                 className="btn btn-primary m-2"
                                 onClick={() => handleSelect(course._id)}
                             >
@@ -49,14 +67,16 @@ function SelectCourse() {
                             </button>
                         ))
                     ) : (
-                        <p className='mt-4'>Aún no has creado ningún curso.</p>
+                        <p className='mt-4 text-muted'>Aún no has creado ningún curso.</p>
                     )}
                 </div>
-                <div className="text-center mt-4">
-                    <button className="btn btn-secondary" onClick={() => navigate('/main-teacher')}>
-                        Volver al menú
-                    </button>
-                </div>
+
+                <button
+                    className="btn btn-secondary mt-4"
+                    onClick={() => navigate('/main-teacher')}
+                >
+                    Volver al menú
+                </button>
             </div>
         </BackgroundLayout>
     );
