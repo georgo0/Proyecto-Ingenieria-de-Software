@@ -67,7 +67,7 @@ function Estadísticas() {
                         margin: '0 auto'
                     }}
                 >
-                    <h2 className="text-center mb-4 text-dark">🥇 Ranking del Curso 🥇</h2>
+                    <h2 className="text-center mb-4 text-dark">🥇 Course Ranking 🥇</h2>
                     <div className="table-responsive">
                         <table className="table table-bordered table-striped text-center table-hover mb-0">
                             <thead className="table-dark">
