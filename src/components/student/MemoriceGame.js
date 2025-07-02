@@ -91,13 +91,13 @@ function MemoriceGame() {
     }, [matchedPairs, moves, unidadId, navigate]);
 
     // Manejo de estados de carga y error
-    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando juego...</h2></BackgroundLayout>;
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Loading game...</h2></BackgroundLayout>;
     if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
 
       return (
         <BackgroundLayout>
             <div className="container text-center mt-4">
-                <h2 className="text-white">Juego de Memorice</h2>
+                <h2 className="text-white">Memory Game</h2>
                 <div className="memorice-board">
                     {cards.map((card, index) => {
                         
@@ -116,7 +116,7 @@ function MemoriceGame() {
                                 <div className="card-inner">
                                     <div className="card-face card-front">?</div>
                                     <div className="card-face card-back">
-                                        {/* 👇 Usamos la nueva variable imageUrl */}
+                                        {/* Usamos la nueva variable imageUrl */}
                                         <img src={imageUrl} alt={card.palabra} />
                                         <p>{card.palabra}</p>
                                     </div>
@@ -126,7 +126,7 @@ function MemoriceGame() {
                     })}
                 </div>
                 <div className="text-center mt-4">
-                    <button className="btn btn-secondary" onClick={() => navigate(-1)}>Volver</button>
+                    <button className="btn btn-secondary" onClick={() => navigate(-1)}>Leave game</button>
                 </div>
             </div>
         </BackgroundLayout>

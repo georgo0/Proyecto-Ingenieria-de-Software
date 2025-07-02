@@ -35,13 +35,13 @@ function Minijuegos() {
         navigate(`/minijuegos/${juegoTipo}/${unidadId}`);
     };
 
-    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Cargando minijuegos...</h2></BackgroundLayout>;
+    if (loading) return <BackgroundLayout><h2 className="text-white text-center mt-5">Loading games...</h2></BackgroundLayout>;
     if (error) return <BackgroundLayout><div className="alert alert-danger container mt-5">{error}</div></BackgroundLayout>;
 
     return (
         <BackgroundLayout>
             <div className="container mt-5">
-                <h2 className="mb-4 text-center text-white">Minijuegos para la unidad: {unidad?.nombre}</h2>
+                <h2 className="mb-4 text-center text-white">Minigames for unit: {unidad?.nombre}</h2>
 
                 <div className="d-flex justify-content-center">
                     <div className="d-flex flex-row gap-3 overflow-auto px-2 pb-3">
@@ -57,7 +57,7 @@ function Minijuegos() {
                                 </div>
                             ))
                         ) : (
-                            <p className="text-white">No hay juegos disponibles para esta unidad.</p>
+                            <p className="text-white">There are no games available for this unit.</p>
                         )}
                     </div>
                 </div>
@@ -65,7 +65,7 @@ function Minijuegos() {
                 <div className="text-center mt-4">
                     {/* navigate(-1) es un truco simple para "volver" a la página anterior */}
                     <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-                        Volver a las unidades
+                        Back to units
                     </button>
                 </div>
             </div>

@@ -146,7 +146,7 @@ function GuessTheWordGame() {
                         Points: {score}
                     </div>
                 </div>
-                <button className="btn btn-secondary mt-4" onClick={() => navigate(-1)}>Salir del juego</button>
+                <button className="btn btn-secondary mt-4" onClick={() => navigate(-1)}>Leave game</button>
             </div>
         </BackgroundLayout>
     );
