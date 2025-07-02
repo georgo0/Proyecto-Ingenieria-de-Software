@@ -40,7 +40,7 @@ function MainStudent() {
     return (
         <BackgroundLayout>
             <div className="container mt-5" style={{ maxWidth: '600px' }}>
-                <h2 className="text-center mb-4">Welcome, {nombre}!</h2>
+                <h2 className="text-center mb-4">Welcome student!</h2>
                 <div className="d-flex flex-column gap-4">
 
                     {/*  Si no tiene curso, muestra el botón para unirse */}
