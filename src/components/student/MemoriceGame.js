@@ -79,7 +79,6 @@ function MemoriceGame() {
                         const config = { headers: { Authorization: `Bearer ${token}` } };
                         await axios.patch('/api/alumnos/update-score', { score }, config);
                         console.log('Puntaje actualizado exitosamente.');
-                        // Opcional: Redirigir de vuelta al menú de juegos
                         navigate(`/minijuegos/${unidadId}`);
                     } catch (error) {
                         console.error('Error al guardar el puntaje:', error);
@@ -101,11 +100,9 @@ function MemoriceGame() {
                 <div className="memorice-board">
                     {cards.map((card, index) => {
                         
-                        // --- LÓGICA CLAVE PARA MOSTRAR LA IMAGEN ---
-                        // Comprueba si la ruta de la imagen es una URL completa o una local
                         const imageUrl = card.imagen && card.imagen.startsWith('http')
-                            ? card.imagen // Si es de internet, úsala directamente
-                            : `${backendUrl}${card.imagen}`; // Si no, añade la URL del backend
+                            ? card.imagen 
+                            : `${backendUrl}${card.imagen}`; 
 
                         return (
                             <div 
@@ -116,7 +113,6 @@ function MemoriceGame() {
                                 <div className="card-inner">
                                     <div className="card-face card-front">?</div>
                                     <div className="card-face card-back">
-                                        {/* Usamos la nueva variable imageUrl */}
                                         <img src={imageUrl} alt={card.palabra} />
                                         <p>{card.palabra}</p>
                                     </div>

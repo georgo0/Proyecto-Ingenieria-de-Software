@@ -17,7 +17,7 @@ function NavigationBar() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">App de inglés</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Among Words</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 

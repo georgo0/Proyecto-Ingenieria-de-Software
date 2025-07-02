@@ -49,10 +49,10 @@ function Home() {
               className="fw-bold fs-1"
               style={{ textShadow: '2px 2px 6px rgba(0, 0, 0, 0.8)' }}
             >
-              Welcome to the app!
+              Welcome to Among Words ඞ!
             </h1>
             <h4 className="fw-normal fst-italic" style={textSpanishStyle}>
-              ¡Bienvenido a la aplicación!
+              ¡Bienvenido a Among Words!
             </h4>
           </div>
 
